@@ -6,7 +6,7 @@ var Randomizer = (function () {
     function Randomizer() {
     }
     Randomizer.randomNumber = function (rangeStart, rangeEnd) {
-        return Math.ceil((Math.random() * rangeEnd) - rangeStart);
+        return Math.ceil((Math.random() * rangeEnd)) + rangeStart;
     };
     return Randomizer;
 }());

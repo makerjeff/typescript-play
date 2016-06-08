@@ -1,6 +1,7 @@
 /**
  * Created by jeffersonwu on 6/5/16.
  */
+//var Randomizer = require('./tools/Randomizer');
 window.addEventListener('load', function (e) {
     console.log('Everything including images, sounds, etc. have been loaded.');
     var master = new Employee.Human('Master', 'JIIFE', 1, 1000);
@@ -16,14 +17,19 @@ window.addEventListener('load', function (e) {
         var button = document.createElement('div');
         button.setAttribute('id', element.firstName);
         button.classList.add('bootan');
+        button.setAttribute('draggable', 'true');
         var buttonText = document.createTextNode('attack ' + element.firstName + '!');
         button.addEventListener('click', function (e) {
             //console.log(array[index]);
-            element.receiveDamage(10);
+            element.receiveDamage(Math.ceil(Math.random() * 50));
             if (element.health <= 0) {
                 console.log(element.firstName + ' has been killed.');
                 var elem = document.getElementById(element.firstName);
-                elem.parentNode.removeChild(this);
+                elem.classList.add('bootanDead');
+                elem.innerHTML = '';
+                elem.addEventListener('transitionend', function (e) {
+                    elem.parentNode.removeChild(this);
+                });
             }
         });
         button.appendChild(buttonText);
@@ -33,5 +39,6 @@ window.addEventListener('load', function (e) {
 //just to show that this loads first
 window.addEventListener('DOMContentLoaded', function (e) {
     console.log('DOM content (text, elements, etc) loaded.');
+    console.log(Randomizer.randomNumber(0, 100));
 });
 //# sourceMappingURL=main.js.map

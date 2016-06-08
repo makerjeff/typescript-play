@@ -5,7 +5,7 @@
 
 export class Randomizer {
     static randomNumber(rangeStart:number, rangeEnd:number) {
-        return Math.ceil((Math.random() * rangeEnd) - rangeStart);
+        return Math.ceil((Math.random() * rangeEnd)) + rangeStart;
     }
 }
 

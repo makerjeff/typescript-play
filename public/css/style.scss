@@ -25,6 +25,12 @@ body, html {
   height: 50px;
 
   border: 1px solid black;
+
+  transition: width 0.5s;
+}
+
+.bootanDead {
+  width: 0px;
 }
 
 #container {
