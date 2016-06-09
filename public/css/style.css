@@ -1,26 +1,38 @@
 body, html {
+  position: relative;
   font-family: "Helvetica", "Arial", sans-serif;
   color: #333;
   width: 100%;
   height: 100%;
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  user-select: none; }
 
 .bootan {
   display: flex;
   position: relative;
   user-select: none;
+  background: #f0f0f0;
   justify-content: center;
   align-items: center;
-  width: 250px;
+  margin: 10px 10px 10px 10px;
+  width: 150px;
   height: 50px;
   border: 1px solid black;
-  transition: width 0.5s; }
+  border-radius: 5px;
+  transition: width 0.5s;
+  box-shadow: 1px 1px 3px rgba(10, 10, 10, 0.5); }
+
+.bootan:nth-child(2n+0) {
+  background: #ffc8c8; }
 
 .bootanDead {
   width: 0px; }
 
 #container {
   display: flex;
-  position: relative; }
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap; }
 
 /*# sourceMappingURL=style.css.map */

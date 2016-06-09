@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css'>
+    <title>InfoHover</title>
+
+    <style>
+        /* BASE STYLE */
+        body, html {
+            position: absolute;
+            margin: 0px 20px 0px 20px;
+            padding: 0px 0px 0px 0px;
+            width: 100%;
+            height: 100%;
+        }
+        header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Montserrat, Arial, sans-serif;
+            text-transform: uppercase;
+        }
+
+        /* CLASSES */
+        .article {
+            font-family: 'Open Sans', Arial, sans-serif;
+            position: relative;
+        }
+
+        .overlay {
+            font-family: 'Open Sans', Arial, sans-serif;
+            position: absolute;
+        }
+
+        .image {
+            position: relative;
+            width: 470px;
+        }
+
+        /* ID's */
+
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>InfoHover</h1>
+</header>
+
+<div id="container">
+
+</div>
+
+<script>
+    //dummy data
+    var dummyData = [
+        {postID: 1000, title:'first article', body: 'First of many articles!', ImgFile: 'jeff_mug_shot.jpg', link: 'http://www.makerjeff.com'},
+        {postID: 1001, title:'second article', body: 'Second of much more articles.', ImgFile: 'JWX_LOGO.gif', link: 'http://www.jeffersonwu.com'},
+        {postID: 1002, title:'third article', body: 'Just another article body.', ImgFile: 'nerf_christmas.jpg', link: 'http://www.jwxstudios.com'},
+        {postID: 1003, title:'fourth article', body: 'Next article in line.', ImgFile: 'R_Penguin.jpg', link: 'http://www.google.com'}
+    ];
+
+    //everything's loaded
+    window.addEventListener('load', function(e){
+        console.log('All elements loaded.');
+
+        JeffApp.renderArticles(dummyData);
+
+    });
+
+    //dom elements loaded
+    window.addEventListener('DOMContentLoaded', function(e){
+        console.log('DOM content loaded.');
+    });
+
+
+    // ===== FUNCTION DEFINITIONS =====
+
+    var JeffApp = {
+        renderArticles: function(input) {
+            //create articles
+            input.forEach(function(element, index, array){
+                console.log(array[index]);
+
+                var article = document.createElement('div');
+                var headline = document.createElement('h2');
+                var headline_text = document.createTextNode(input[index].title);
+                var image = document.createElement('img');
+
+                image.src = './img/' + input[index].ImgFile;
+
+                headline.appendChild(headline_text);
+                article.appendChild(headline);
+                article.appendChild(image);
+                document.body.appendChild(article);
+
+                article.setAttribute('id',input[index].postID.toString());
+                article.classList.add('article');
+
+                image.classList.add('image');
+            });
+        },
+
+        grabArticles: function(){
+            //grab articles
+            var elements = document.getElementsByClassName('article');
+            console.log(elements);
+        }
+
+    };
+
+</script>
+
+
+</body>
+</html>
