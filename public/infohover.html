@@ -25,6 +25,7 @@
 
         /* CLASSES */
         .article {
+            display: block;
             font-family: 'Open Sans', Arial, sans-serif;
             position: relative;
         }
@@ -37,9 +38,40 @@
         .image {
             position: relative;
             width: 470px;
+            z-index: 10;
+        }
+
+        .veil {
+            position: absolute;
+
+            color: rgba(255,255,255,0);
+
+            top: 53px;
+            left: 0px;
+
+            padding: 20px 30px 0px 20px;
+
+            width: 470px;
+            height: 85%;
+            background: rgba(10,10,10,0);
+
+            text-shadow: 1px 2px 1px rgba(20,20,20,0);
+            z-index: 20;
+
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+
+        .veil:hover {
+            /*background: rgba(10,10,10,0.2);*/
+            color: rgba(255,255,255,1.0);
+            text-shadow: 1px 2px 1px rgba(20,20,20,0.5);
         }
 
         /* ID's */
+        #container {
+            display: flex;
+            flex-wrap: wrap;
+        }
 
     </style>
 </head>
@@ -56,10 +88,11 @@
 <script>
     //dummy data
     var dummyData = [
-        {postID: 1000, title:'first article', body: 'First of many articles!', ImgFile: 'jeff_mug_shot.jpg', link: 'http://www.makerjeff.com'},
-        {postID: 1001, title:'second article', body: 'Second of much more articles.', ImgFile: 'JWX_LOGO.gif', link: 'http://www.jeffersonwu.com'},
-        {postID: 1002, title:'third article', body: 'Just another article body.', ImgFile: 'nerf_christmas.jpg', link: 'http://www.jwxstudios.com'},
-        {postID: 1003, title:'fourth article', body: 'Next article in line.', ImgFile: 'R_Penguin.jpg', link: 'http://www.google.com'}
+        {postID: 1000, title:'first article title', body: 'First of many articles!', ImgFile: 'jeff_mug_shot.jpg', link: 'http://www.makerjeff.com'},
+        {postID: 1001, title:'second article title', body: 'Second of much more articles.', ImgFile: 'JWX_LOGO.gif', link: 'http://www.jeffersonwu.com'},
+        {postID: 1002, title:'third article title', body: 'Just another article body.', ImgFile: 'nerf_christmas.jpg', link: 'http://www.jwxstudios.com'},
+        {postID: 1003, title:'fourth article title', body: 'Next article in line.', ImgFile: 'R_Penguin.jpg', link: 'http://www.google.com/search?=jefferson%20wu'},
+        {postID: 1004, title:'fifth awesome article title', body: 'This is the last of the latest articles of awesomeness. please keep typing more to witness what happens when text goes beyond.', ImgFile: 'linkedInPhoto.jpg', link: 'http://www.linkedin.com'}
     ];
 
     //everything's loaded
@@ -67,6 +100,7 @@
         console.log('All elements loaded.');
 
         JeffApp.renderArticles(dummyData);
+        JeffApp.grabArticles();
 
     });
 
@@ -88,25 +122,45 @@
                 var headline = document.createElement('h2');
                 var headline_text = document.createTextNode(input[index].title);
                 var image = document.createElement('img');
+                var veil = document.createElement('div');   //for the blackening
+                var veil_text = document.createTextNode(input[index].body);
+                var linkOut = document.createElement('a');
 
-                image.src = './img/' + input[index].ImgFile;
+                linkOut.setAttribute('href', input[index].link);
+                linkOut.setAttribute('target', '_blank');
 
+                veil.appendChild(veil_text);
+
+                veil.classList.add('veil');
+
+                linkOut.appendChild(image);
                 headline.appendChild(headline_text);
                 article.appendChild(headline);
-                article.appendChild(image);
+                article.appendChild(linkOut);
+                linkOut.appendChild(veil);
                 document.body.appendChild(article);
+
+                veil.style.width = '470px';
+//                veil.style.height = '200px';
 
                 article.setAttribute('id',input[index].postID.toString());
                 article.classList.add('article');
-
+                image.src = './img/' + input[index].ImgFile;
                 image.classList.add('image');
+
+
             });
         },
 
         grabArticles: function(){
             //grab articles
-            var elements = document.getElementsByClassName('article');
-            console.log(elements);
+            var images = document.getElementsByClassName('image');
+
+            for(var i = 0; i < images.length; i++) {
+                console.log(images[i]);
+            }
+
+
         }
 
     };
