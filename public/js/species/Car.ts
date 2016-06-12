@@ -25,7 +25,7 @@ class Car {
         alert('Engine stopped: ' + this.engine);
     }
 
-    createButton() {
+    createButton(targetDiv) {
         let button = document.createElement('button');
         let buttonText = document.createTextNode('start this ' + this.engine + ' engine.');
 
@@ -42,13 +42,16 @@ class Car {
         //var self = this;
 
         button.appendChild(buttonText);
-        document.body.appendChild(button);
-        document.body.appendChild(startSound);
+        targetDiv.appendChild(button);
+        targetDiv.appendChild(startSound);
 
         console.log('A car with a ' + this.engine + ' was created.');
 
         button.addEventListener('click', (e) => {
             e.preventDefault();
+
+            this.updateText(buttonText);    //update button text
+
 
             if(this.engineOn === false) {
                 startSound.play();
@@ -58,6 +61,7 @@ class Car {
             else if (this.hornHonks < 3) {
                 carHorn.play();
                 this.hornHonks += 1;
+
                 console.log(this.engine + ' is already on. Honking horn instead.');
                 console.log(this.hornHonks);
             }
@@ -69,18 +73,10 @@ class Car {
 
         });
     }
+
+    updateText(targetText) {
+        targetText.nodeValue = 'engine started. press to honk ' + this.engine;
+    }
 }
 
-//normal JS
-window.addEventListener('load', function(e){
-
-    e.preventDefault();
-
-    var subaru = new Car('2.5 Liter Boxer');
-    var toyota = new Car('1.8 Liter inline 4');
-    var nissan = new Car('2.0 Liter Turbo');
-
-    subaru.createButton();
-    toyota.createButton();
-    nissan.createButton();
-});
+// normal JS can go below here 

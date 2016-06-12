@@ -16,7 +16,7 @@ var Car = (function () {
     Car.prototype.stop = function () {
         alert('Engine stopped: ' + this.engine);
     };
-    Car.prototype.createButton = function () {
+    Car.prototype.createButton = function (targetDiv) {
         var _this = this;
         var button = document.createElement('button');
         var buttonText = document.createTextNode('start this ' + this.engine + ' engine.');
@@ -29,11 +29,12 @@ var Car = (function () {
         //load a reference to 'this' to be used with nested functions. deprecated by fat-arrow lambda =>
         //var self = this;
         button.appendChild(buttonText);
-        document.body.appendChild(button);
-        document.body.appendChild(startSound);
+        targetDiv.appendChild(button);
+        targetDiv.appendChild(startSound);
         console.log('A car with a ' + this.engine + ' was created.');
         button.addEventListener('click', function (e) {
             e.preventDefault();
+            _this.updateText(buttonText); //update button text
             if (_this.engineOn === false) {
                 startSound.play();
                 _this.engineOn = true;
@@ -52,16 +53,10 @@ var Car = (function () {
             }
         });
     };
+    Car.prototype.updateText = function (targetText) {
+        targetText.nodeValue = 'engine started. press to honk ' + this.engine;
+    };
     return Car;
 }());
-//normal JS
-window.addEventListener('load', function (e) {
-    e.preventDefault();
-    var subaru = new Car('2.5 Liter Boxer');
-    var toyota = new Car('1.8 Liter inline 4');
-    var nissan = new Car('2.0 Liter Turbo');
-    subaru.createButton();
-    toyota.createButton();
-    nissan.createButton();
-});
+// normal JS can go below here  
 //# sourceMappingURL=Car.js.map
