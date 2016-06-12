@@ -4,39 +4,42 @@
 
 //modified for TS tutorial
 class Car {
-    //vars
+    //variables
     engine: string;
     engineOn: boolean;
     hornHonks: number;
 
     //constructor
-    constructor(engine:string, engineOn: boolean) {
+    constructor(engine:string) {
         this.engine = engine;
-        this.engineOn = engineOn;
+        this.engineOn = false;
         this.hornHonks = 0;
     }
 
     //functions
     start() {
-        alert('Engine started; ' + this.engine);
+        alert('Engine started: ' + this.engine);
     }
 
     stop() {
-        alert('Engine started; ' + this.engine);
+        alert('Engine stopped: ' + this.engine);
     }
 
     createButton() {
-        var button = document.createElement('button');
-        var buttonText = document.createTextNode('start this ' + this.engine + ' engine.');
+        let button = document.createElement('button');
+        let buttonText = document.createTextNode('start this ' + this.engine + ' engine.');
 
-        var startSound = document.createElement('audio');
+        let startSound = document.createElement('audio');
         startSound.src = './sound/carstartgarage.mp3';
 
-        var carHorn = document.createElement('audio');
+        let carHorn = document.createElement('audio');
         carHorn.src = './sound/carhorn.mp3';
 
-        //load a reference to 'this' to be used with same-level
-        var self = this;
+        let carExplode = document.createElement('audio');
+        carExplode.src = './sound/carexplode.mp3';
+
+        //load a reference to 'this' to be used with nested functions. deprecated by fat-arrow lambda =>
+        //var self = this;
 
         button.appendChild(buttonText);
         document.body.appendChild(button);
@@ -44,26 +47,25 @@ class Car {
 
         console.log('A car with a ' + this.engine + ' was created.');
 
-        button.addEventListener('click', function(e){
-            let numberOfHonks = 0;
-            if(self.engineOn === false) {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            if(this.engineOn === false) {
                 startSound.play();
-                self.engineOn = true;
-                console.log('starting ' + self.engine);
-            } else {
-                carHorn.play();
-                self.hornHonks += 1;
-                console.log(self.engine + ' is already on. Honking horn instead.');
-                console.log(self.hornHonks);
-
-                if(self.hornHonks >= 3) {
-                    console.log( self.engine + ' engine exploded.');
-                    button.parentNode.removeChild(this);
-                }
+                this.engineOn = true;
+                console.log('starting ' + this.engine);
             }
-
-
-
+            else if (this.hornHonks < 3) {
+                carHorn.play();
+                this.hornHonks += 1;
+                console.log(this.engine + ' is already on. Honking horn instead.');
+                console.log(this.hornHonks);
+            }
+            else {
+                console.log( this.engine + ' engine exploded.');
+                carExplode.play();
+                button.parentNode.removeChild(button);
+            }
 
         });
     }
@@ -72,9 +74,11 @@ class Car {
 //normal JS
 window.addEventListener('load', function(e){
 
-    var subaru = new Car('2.5 Liter Boxer', false);
-    var toyota = new Car('1.8 Liter inline 4', false);
-    var nissan = new Car('2.0 Liter Turbo', false);
+    e.preventDefault();
+
+    var subaru = new Car('2.5 Liter Boxer');
+    var toyota = new Car('1.8 Liter inline 4');
+    var nissan = new Car('2.0 Liter Turbo');
 
     subaru.createButton();
     toyota.createButton();
