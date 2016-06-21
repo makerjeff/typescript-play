@@ -8,8 +8,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "express":"latest",
-    "colors":"latest"
+    "express": "^4.13.4",
+    "colors": "^1.1.2",
+    "serve-favicon":"^2.3.0"
   },
   "author": "Jefferson Wu <makerjeffwu@gmail.com>",
   "license": "ISC"
