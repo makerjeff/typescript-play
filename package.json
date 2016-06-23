@@ -10,7 +10,8 @@
   "dependencies": {
     "express": "^4.13.4",
     "colors": "^1.1.2",
-    "serve-favicon":"^2.3.0"
+    "serve-favicon":"^2.3.0",
+    "phaser":"^2.4.8"
   },
   "author": "Jefferson Wu <makerjeffwu@gmail.com>",
   "license": "ISC"
