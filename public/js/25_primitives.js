@@ -20,8 +20,7 @@ var demo_25;
     var firstName = 'John';
     var lastName = 'Papa';
     function getArrayLength(x) {
-        var len = x.length;
-        return len;
+        return x.length;
     }
 })(demo_25 || (demo_25 = {}));
 //# sourceMappingURL=25_primitives.js.map

@@ -24,7 +24,6 @@ module demo_25 {
     var lastName = 'Papa';
 
     function getArrayLength(x:string[]){
-        var len = x.length;
-        return len;
+        return x.length;
     }
 }
