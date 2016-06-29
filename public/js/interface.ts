@@ -9,16 +9,46 @@ interface Person {
     age:number;
 }
 
+interface MegaPerson {
+    firstname: string;
+    lastname: string;
+    age: number;
+}
+
+
+class MegaEmployee {
+
+    constructor(data: MegaPerson) {
+
+        //TODO: figure this out.
+
+    }
+
+
+
+    employee(person: MegaPerson): string {
+        return 'Hi there, ' + person.firstname + ' ' + person.lastname + '! You are ' + person.age + ' years old. ';
+    }
+
+    createMonkey(person: MegaPerson) {
+        var monkey = document.createElement('button');
+        var monkeyText = document.createTextNode(person.firstname + ' ' + person.lastname);
+        monkey.appendChild(monkeyText);
+        document.body.appendChild(monkey);
+        return this;
+    }
+}
+
 // a non-void function return type
 function employee(person: Person): string {
     return 'Hi ' + person.firstname + ' ' + person.lastname + '! You are currently ' + person.age + ' years old!';
 }
 
-let jeff = {firstname: 'Jeff', lastname: 'Wu'};
-let shirley = {firstname: 'Shirley', lastname: 'Wu'};
+let jeff = {firstname: 'Jeff', lastname: 'Wu', age: 33};
+let shirley = {firstname: 'Shirley', lastname: 'Wu', age:37};
 
-let dan = {firstname: 'Daniel', lastname: 'Casey'};
-let josie = {firstname: 'Josie', lastname: 'Casey'};
+let dan = {firstname: 'Daniel', lastname: 'Casey', age:31};
+let josie = {firstname: 'Josie', lastname: 'Casey', age:34};
 
 
 
